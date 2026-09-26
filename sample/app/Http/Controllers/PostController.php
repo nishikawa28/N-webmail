@@ -88,6 +88,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        // 投稿を削除
+        $post->delete();
+
+        // 一覧画面へリダイレクト
+        return redirect()->route('posts.index');
     }
 }

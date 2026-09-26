@@ -13,9 +13,18 @@
         <p>{!! nl2br(e($post->content)) !!}</p>
     </div>
     <hr>
-    <!-- 編集リンクを追加 -->
-    <a href="{{ route('posts.edit', $post) }}">この投稿を編集する</a>
-    |
-    <a href="{{ route('posts.index') }}">一覧に戻る</a>
+
+    <div style="display: flex; gap: 10px; align-items: center;">
+        <a href="{{ route('posts.edit', $post) }}">この投稿を編集する</a>
+        |
+        <a href="{{ route('posts.index') }}">一覧に戻る</a>
+        |
+        <!-- 削除ボタン（誤クリック防止の確認ダイアログ付き） -->
+        <form action="{{ route('posts.destroy', $post) }}" method="POST" onsubmit="return confirm('本当に削除しますか？');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" style="color: red; cursor: pointer;">この投稿を削除する</button>
+        </form>
+    </div>
 </body>
 </html>
