@@ -13,6 +13,9 @@
         <p>{!! nl2br(e($post->content)) !!}</p>
     </div>
     <hr>
+    <!-- 編集リンクを追加 -->
+    <a href="{{ route('posts.edit', $post) }}">この投稿を編集する</a>
+    |
     <a href="{{ route('posts.index') }}">一覧に戻る</a>
 </body>
 </html>

@@ -60,7 +60,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        // 編集対象の投稿データをビューに渡す
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -68,7 +69,18 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        // バリデーション
+        $validated = $request->validate([
+            'title'       => 'required|max:255',
+            'content'     => 'required',
+            'author_name' => 'required|max:50',
+        ]);
+
+        // DBのデータを更新
+        $post->update($validated);
+
+        // 詳細画面へリダイレクト
+        return redirect()->route('posts.show', $post);
     }
 
     /**
