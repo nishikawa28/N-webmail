@@ -22,7 +22,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        //投稿フォーム画面を表示
+        return view("posts.create");
     }
 
     /**
@@ -30,8 +31,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // バリデーション（必須チェック・文字数制限）
+        $validated = $request->validate([
+            'title'       => 'required|max:255',
+            'content'     => 'required',
+            'author_name' => 'required|max:50',
+        ]);
+
+        // DBに保存
+        Post::create($validated);
+
+        // 一覧画面へリダイレクト
+        return redirect()->route('posts.index');
     }
+    
 
     /**
      * Display the specified resource.
