@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PostController extends Controller
 {
@@ -12,9 +13,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        //動作テスト
         $posts = Post::latest()->get();
-        return view('posts.index', compact('posts'));
+        // 第1引数: resources/js/Pages/ からのパス（拡張子なし）
+        // 第2引数: React側に渡す Props
+        return Inertia::render('Posts/Index', [
+            'posts' => $posts,
+        ]);
     }
 
     /**
@@ -22,37 +26,36 @@ class PostController extends Controller
      */
     public function create()
     {
-        //投稿フォーム画面を表示
-        return view("posts.create");
+    // 
+    return Inertia::render('Posts/Create');
     }
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        // バリデーション（必須チェック・文字数制限）
-        $validated = $request->validate([
-            'title'       => 'required|max:255',
-            'content'     => 'required',
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
             'author_name' => 'required|max:50',
         ]);
 
-        // DBに保存
-        Post::create($validated);
+        Post::create($request->all());
 
-        // 一覧画面へリダイレクト
         return redirect()->route('posts.index');
     }
-    
 
     /**
      * Display the specified resource.
      */
     public function show(Post $post)
     {
-        /*Display the specified resource.*/
-        return view('posts.show', compact('post'));
+        return Inertia::render('Posts/Show', [
+            'post' => $post,
+        ]);
+
     }
 
     /**
