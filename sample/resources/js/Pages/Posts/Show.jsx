@@ -26,7 +26,10 @@ export default function Show({ post }) {
                 </h1>
 
                 <div style={{ fontSize: '14px', color: '#6b7280', marginBottom: '20px' }}>
-                    投稿者: {post.author_name}
+                    <span>投稿者: {post.author_name}</span>
+                    <span style={{ marginLeft: '12px', color: '#9ca3af' }}>
+                        {new Date(post.created_at).toLocaleString('ja-JP')}
+                    </span>
                 </div>
 
                 <div style={{ color: '#374151', lineHeight: '1.6', whiteSpace: 'pre-wrap', marginBottom: '32px' }}>
