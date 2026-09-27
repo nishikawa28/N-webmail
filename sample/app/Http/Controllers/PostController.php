@@ -64,7 +64,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         // 編集対象の投稿データをビューに渡す
-        return view('posts.edit', compact('post'));
+        return Inertia::render('Posts/Edit', [
+            'post' => $post,
+        ]);
     }
 
     /**

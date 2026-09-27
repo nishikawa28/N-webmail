@@ -38,7 +38,7 @@ export default function Show({ post }) {
 
                 <div style={{ display: 'flex', gap: '12px', borderTop: '1px solid #f3f4f6', paddingTop: '16px' }}>
                     <Link
-                        href={`posts/${post.id}/edit`}
+                        href={`/posts/${post.id}/edit`}
                         style={{
                             padding: '6px 12px',
                             backgroundColor: '#4b5563',
@@ -51,19 +51,18 @@ export default function Show({ post }) {
                         編集する
                     </Link>
 
-                    {// 画面の部分
-                        } 
+                    {/* 画面の部分  */} 
                     <button
                         type = "button"
                         onClick = {handleDelete}
                         style = {{
-                            padding: `6px 12px`,
-                            backgroundColor: `#dc2525`,
-                            color: `#fff`,
-                            border: `none`,
-                            borderRadius: `5px`,
-                            fontSize: `15px`,
-                            cursor: `pointer`
+                            padding: '6px 12px',
+                            backgroundColor: '#dc2525',
+                            color: '#fff',
+                            border: 'none',
+                            borderRadius: '5px',
+                            fontSize: '15px',
+                            cursor: 'pointer'
                         }}
                     >
                         削除する
